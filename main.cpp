@@ -119,7 +119,12 @@ int main(int argc, char *argv[]) {
                 result response = w.exec("SELECT * FROM Persons WHERE (sex='M') AND (Name LIKE 'F%'); ");
                 w.commit();
                 clock_t end = clock();
-                cout << (double) (end - begin) / CLOCKS_PER_SEC << "seconds";
+                cout << (double) (end - begin) / CLOCKS_PER_SEC << " seconds";
+            }
+            if (strcmp(argv[1], "6") == 0) {
+                work w(C);
+                result response = w.exec("CREATE INDEX persons_name_sex_idx on persons(name, sex);");
+                w.commit();
             }
         } else {
             cout << "Can't open database" << endl;
